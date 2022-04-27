@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "auth.jwt.secret",
+    "type": "java.lang.String",
+    "description": "A propertie 'auth.jwt.secret' chave secreta do token"
+  },
+  {
+    "name": "auth.jwt.expiration",
+    "type": "java.lang.String",
+    "description": "A propertie 'auth.jwt.expiration' tempo de duracao do token"
+  }
+]}
