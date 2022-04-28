@@ -7,13 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.unip.model.Usuario;
 import br.com.unip.repository.UsuarioRepository;
@@ -35,18 +31,9 @@ public class AutorizacaoViaTokenFilter extends OncePerRequestFilter {
 		
 		if(tokenService.isTokenValido(token)) {
 			autenticarCliente(token);
-			
-			filterChain.doFilter(request, response); // Depois de verificar tudo, segue o fluxo
-			
-		} else {
-			ObjectMapper mapper = new ObjectMapper();
-			
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			
-			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-		
-			mapper.writeValue(response.getWriter(), "TokenError, verifique se o token está correto ou expirado");
 		}
+		
+		filterChain.doFilter(request, response); // Depois de verificar tudo, segue o fluxo
 	}
 
 	private void autenticarCliente(String token) {

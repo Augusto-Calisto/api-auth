@@ -22,8 +22,6 @@ public class ErroValidacaoHandler {
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(value = MethodArgumentNotValidException.class)
 	public List<ErroFormulario> handle(MethodArgumentNotValidException erro) {
-		System.out.println("rtnrthn");
-		
 		List<ErroFormulario> erros = new ArrayList<ErroFormulario>();
 		
 		List<FieldError> fieldErrors = erro.getBindingResult().getFieldErrors();

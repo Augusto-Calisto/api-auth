@@ -43,4 +43,9 @@ public class Regra implements Serializable, GrantedAuthority {
 	public String getAuthority() {
 		return "ROLE_" + this.nome;
 	}
+
+	@Override
+	public String toString() {
+		return "[Id= " + id + ", Nome= " + nome + "]";
+	}
 }

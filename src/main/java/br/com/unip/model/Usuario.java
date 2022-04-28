@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,16 +31,25 @@ public class Usuario implements UserDetails, Serializable {
 	@Column
 	private String nome;
 	
-	@Column(unique = true)
+	@Column
 	private String email;
 	
 	@Column
 	private String senha;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "USUARIOS_REGRAS", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "regra_id"))
 	private List<Regra> regras;
 	
+	public Usuario() {}
+
+	public Usuario(String nome, String email, String senha, List<Regra> regras) {
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.regras = regras;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -86,6 +96,8 @@ public class Usuario implements UserDetails, Serializable {
 		
 		int result = 1;
 		
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		
 		return result;
@@ -93,24 +105,27 @@ public class Usuario implements UserDetails, Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj == null) {
+		if(obj == null)
 			return false;
-		}
 		
-		if(getClass() != obj.getClass()) {
+		if(getClass() != obj.getClass())
 			return false;
-		}
 		
 		Usuario other = (Usuario) obj;
 		
-		if(id == null) {
-			if(other.id != null) {
+		if(email == null) {
+			if (other.email != null)
 				return false;
-			}
 			
-		} else if(!id.equals(other.id)) {
+		} else if(!email.equals(other.email))
 			return false;
-		}
+		
+		if(id == null) {
+			if (other.id != null)
+				return false;
+			
+		} else if(!id.equals(other.id))
+			return false;
 		
 		return true;
 	}
