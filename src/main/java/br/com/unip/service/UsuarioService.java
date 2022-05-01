@@ -20,6 +20,10 @@ public class UsuarioService {
 		return usuarioRepository.findById(id);
 	}
 	
+	public List<Usuario> findAll() {
+		return usuarioRepository.findAll();
+	}
+	
 	public Usuario save(Usuario usuario) {
 		String senhaCriptografada = new BCryptPasswordEncoder().encode(usuario.getSenha());
 		
@@ -30,9 +34,5 @@ public class UsuarioService {
 
 	public void delete(Long id) {
 		usuarioRepository.deleteById(id);
-	}
-
-	public List<Usuario> findAll() {
-		return usuarioRepository.findAll();
 	}
 }

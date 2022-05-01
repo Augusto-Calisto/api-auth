@@ -76,7 +76,7 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuarioAtualizado);
 	}
 	
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("{id}")
 	public ResponseEntity<Usuario> excluirUsuario(@PathVariable("id") Long id) {
 		usuarioService.delete(id);
 		

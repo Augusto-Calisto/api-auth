@@ -16,7 +16,7 @@ public class AuthApplication {
 		
 		ConfigurableEnvironment properties = contexto.getEnvironment();
 		
-		int porta = properties.getProperty("server.port", Integer.class);
+		String porta = properties.getProperty("server.port");
 		
 		System.out.println("Acessar a documentacao do swagger em: http://localhost:" + porta + "/swagger-ui.html");
 	}

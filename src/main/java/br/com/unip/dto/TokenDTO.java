@@ -1,8 +1,12 @@
 package br.com.unip.dto;
 
-public class TokenDTO {
-	private String token;
+import java.io.Serializable;
+
+public class TokenDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String tipo;
+	private String token;
 
 	public TokenDTO(String tipo, String token) {
 		this.tipo = tipo;
