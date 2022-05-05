@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class DocumentacaoController {
 
-	@GetMapping("documentacao")
+	@GetMapping("docs")
 	public ModelAndView documentacaoSwagger() {
 		return new ModelAndView("redirect:/swagger-ui.html");
 	}

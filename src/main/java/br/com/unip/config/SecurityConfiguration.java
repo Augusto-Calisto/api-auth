@@ -49,10 +49,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-					.antMatchers(HttpMethod.GET, "/documentacao").permitAll()
+					.antMatchers(HttpMethod.GET, "/docs").permitAll()
 					.antMatchers(HttpMethod.POST, "/auth").permitAll()
 					.antMatchers(HttpMethod.GET, "/h2-console/**").permitAll()
-					.antMatchers(HttpMethod.POST, "/usuario/cadastrar").hasRole("ADM") // Apenas perfil ADM, pode cadastrar 
+					
+					.antMatchers(HttpMethod.GET, "/regra/all", "/usuario/all").hasRole("ADM")  // Apenas perfil ADM 
+					.antMatchers(HttpMethod.POST, "/usuario/save", "/regra/save").hasRole("ADM")
+					.antMatchers(HttpMethod.PUT, "/regra/update").hasRole("ADM")
+					.antMatchers(HttpMethod.DELETE, "/usuario/**").hasRole("ADM")
 				.anyRequest().authenticated()
 			.and()
 				.csrf().disable()

@@ -1,4 +1,4 @@
-package br.com.unip.model;
+package br.com.unip.entity;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.unip.model.Regra;
+import br.com.unip.entity.Regra;
 import br.com.unip.repository.RegraRepository;
 
 @Service
@@ -58,7 +58,7 @@ public class RegraService {
 		return false;
 	}
 	
-	private Regra findByNome(String nome) {
+	public Regra findByNome(String nome) {
 		return regraRepository.findByNome(nome);
 	}
 }

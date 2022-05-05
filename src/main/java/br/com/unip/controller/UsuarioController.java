@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.unip.dto.UsuarioDTO;
-import br.com.unip.model.Regra;
-import br.com.unip.model.Usuario;
+import br.com.unip.entity.Regra;
+import br.com.unip.entity.Usuario;
 import br.com.unip.service.RegraService;
 import br.com.unip.service.UsuarioService;
 
@@ -54,15 +54,15 @@ public class UsuarioController {
 	@PostMapping("save")
 	public ResponseEntity<?> cadastrarUsuario(@Valid @RequestBody UsuarioDTO usuarioDto) {
 		try {
-			Usuario usuario = UsuarioDTO.converterToUsuario(usuarioDto);
+			Usuario usuario = Usuario.converterToUsuario(usuarioDto);
 		
 			List<Regra> regras = regraService.saveAll(usuarioDto.getRegras());
 			
 			usuario.setRegras(regras);
 			
-			Usuario usuarioCadastrado = usuarioService.save(usuario);
+			usuarioService.save(usuario);
 			
-			return ResponseEntity.status(HttpStatus.CREATED).body(usuarioCadastrado);
+			return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDto);
 			
 		} catch(IllegalArgumentException erro) {
 			return ResponseEntity.badRequest().body(erro.getMessage());

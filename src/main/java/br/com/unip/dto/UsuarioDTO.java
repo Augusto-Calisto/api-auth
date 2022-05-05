@@ -3,8 +3,7 @@ package br.com.unip.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import br.com.unip.model.Regra;
-import br.com.unip.model.Usuario;
+import br.com.unip.entity.Regra;
 
 public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -13,12 +12,6 @@ public class UsuarioDTO implements Serializable {
 	private String email;
 	private String senha;
 	private List<Regra> regras;
-	
-	public static Usuario converterToUsuario(UsuarioDTO usuarioDto) {
-		Usuario usuario = new Usuario(usuarioDto.getNome(), usuarioDto.getEmail(), usuarioDto.getSenha(), usuarioDto.getRegras());
-		
-		return usuario;
-	}
 
 	public String getNome() {
 		return nome;

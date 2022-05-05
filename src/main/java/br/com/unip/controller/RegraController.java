@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.unip.model.Regra;
+import br.com.unip.entity.Regra;
 import br.com.unip.service.RegraService;
 
 @RestController

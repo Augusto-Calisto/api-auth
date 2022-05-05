@@ -1,4 +1,4 @@
-package br.com.unip.model;
+package br.com.unip.util;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.unip.dto.TokenDTO;
-import br.com.unip.model.FormLogin;
 import br.com.unip.service.TokenService;
+import br.com.unip.util.FormLogin;
 
 @RestController
 @RequestMapping("auth")

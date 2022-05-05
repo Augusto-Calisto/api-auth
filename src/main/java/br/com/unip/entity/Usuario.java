@@ -1,4 +1,4 @@
-package br.com.unip.model;
+package br.com.unip.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -20,6 +20,8 @@ import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import br.com.unip.dto.UsuarioDTO;
 
 @Entity
 @Table(name = "USUARIOS")
@@ -47,11 +49,11 @@ public class Usuario implements UserDetails, Serializable {
 	
 	public Usuario() {}
 
-	public Usuario(String nome, String email, String senha, List<Regra> regras) {
-		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
-		this.regras = regras;
+	public Usuario(UsuarioDTO usuarioDto) {
+		this.nome = usuarioDto.getNome();
+		this.email = usuarioDto.getEmail();
+		this.senha = usuarioDto.getSenha();
+		this.regras = usuarioDto.getRegras();
 	}
 
 	public Long getId() {
@@ -92,6 +94,12 @@ public class Usuario implements UserDetails, Serializable {
 
 	public void setRegras(List<Regra> regras) {
 		this.regras = regras;
+	}
+	
+	public static Usuario converterToUsuario(UsuarioDTO usuarioDto) {
+		Usuario usuario = new Usuario(usuarioDto);
+		
+		return usuario;
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import br.com.unip.model.Usuario;
+import br.com.unip.entity.Usuario;
 import br.com.unip.repository.UsuarioRepository;
 import br.com.unip.service.TokenService;
 

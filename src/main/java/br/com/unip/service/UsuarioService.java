@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.unip.model.Usuario;
+import br.com.unip.entity.Usuario;
 import br.com.unip.repository.UsuarioRepository;
 
 @Service
