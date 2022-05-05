@@ -2,7 +2,7 @@
 
 > Projeto para o trabalho de Sistemas Distribuidos.
 
-<br/> <p> O link da API encontra-se <a> https://api-auth-unip.herokuapp.com/ </a> </p> <br/>
+<br/> <p> O link da API encontra-se <a> https://api-auth-unip.herokuapp.com/docs </a> </p> <br/>
 
 ### Desenvolvedores
 * Augusto Calisto de Aquino - RA: D898HI-8 <br> <br>
