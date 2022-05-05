@@ -1,12 +1,10 @@
 package br.com.unip;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@SpringBootConfiguration
-class AuthApplicationTests {
+public class AuthApplicationTests {
 
 	@Test
 	void contextLoads() {}
