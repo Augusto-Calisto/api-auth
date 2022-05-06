@@ -22,6 +22,7 @@ import br.com.unip.entity.Regra;
 import br.com.unip.entity.Usuario;
 import br.com.unip.service.RegraService;
 import br.com.unip.service.UsuarioService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("usuario")
@@ -33,6 +34,7 @@ public class UsuarioController {
 	@Autowired
 	private RegraService regraService;
 	
+	@ApiOperation(value = "Buscar o usuaraio específico pelo id")
 	@GetMapping("{id}")
 	public ResponseEntity<Usuario> buscarUsuario(@PathVariable("id") Long id) {
 		Optional<Usuario> optional = usuarioService.findById(id);
@@ -44,6 +46,7 @@ public class UsuarioController {
 		return ResponseEntity.notFound().build();
 	}
 	
+	@ApiOperation(value = "Buscar todos os usuarios")
 	@GetMapping("all")
 	public ResponseEntity<List<Usuario>> buscarTodosUsuarios() {
 		List<Usuario> usuarios = usuarioService.findAll();
@@ -51,6 +54,7 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuarios);
 	}
 	
+	@ApiOperation(value = "Incluir um usuario")
 	@PostMapping("save")
 	public ResponseEntity<?> cadastrarUsuario(@Valid @RequestBody UsuarioDTO usuarioDto) {
 		try {
@@ -69,6 +73,7 @@ public class UsuarioController {
 		}
 	}
 	
+	@ApiOperation(value = "Atualizar alguma informação do usuario")
 	@PutMapping("update")
 	public ResponseEntity<Usuario> atualizarUsuario(@RequestBody Usuario usuario) {
 		Usuario usuarioAtualizado = usuarioService.save(usuario);
@@ -76,6 +81,7 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuarioAtualizado);
 	}
 	
+	@ApiOperation(value = "Excluir usuario")
 	@DeleteMapping("{id}")
 	public ResponseEntity<Usuario> excluirUsuario(@PathVariable("id") Long id) {
 		usuarioService.delete(id);

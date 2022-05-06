@@ -21,6 +21,8 @@ import javax.persistence.Transient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.unip.dto.UsuarioDTO;
 
 @Entity
@@ -41,6 +43,7 @@ public class Usuario implements UserDetails, Serializable {
 	private String email;
 	
 	@Column
+	@JsonIgnore
 	private String senha;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
@@ -123,36 +126,43 @@ public class Usuario implements UserDetails, Serializable {
 	}
 
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.regras;
 	}
 
 	@Override
+	@JsonIgnore
 	public String getPassword() {
 		return this.senha;
 	}
 
 	@Override
+	@JsonIgnore
 	public String getUsername() {
 		return this.email;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isEnabled() {
 		return true;
 	}

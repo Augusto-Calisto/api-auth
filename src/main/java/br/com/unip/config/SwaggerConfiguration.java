@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 
-import br.com.unip.entity.Usuario;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -37,10 +36,9 @@ public class SwaggerConfiguration {
 				.apis(RequestHandlerSelectors.basePackage("br.com.unip")) // Quero que leia todas as classes do projeto, mas, tambem tem annotation para ignorar um end-point
 				.paths(PathSelectors.any()) // Quais end-points o Swagger tem analisar, leia todos os end-points
 				.build()
-				.forCodeGeneration(true)
+				.useDefaultResponseMessages(false)
 				.produces(Collections.singleton("application/json"))
-                .consumes(Collections.singleton("application/json"))
-				.ignoredParameterTypes(Usuario.class); // Para ignorar nos endpoints os parâmetros relacionados a classe Usuario
+                .consumes(Collections.singleton("application/json"));
 	}
 	
 	private ApiInfo apiInfo() {

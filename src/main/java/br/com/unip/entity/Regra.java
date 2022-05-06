@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "REGRAS")
 public class Regra implements Serializable, GrantedAuthority {
@@ -45,6 +47,7 @@ public class Regra implements Serializable, GrantedAuthority {
 	}
 
 	@Override
+	@JsonIgnore
 	public String getAuthority() {
 		return "ROLE_" + this.nome;
 	}

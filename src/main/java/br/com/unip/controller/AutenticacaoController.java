@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.unip.dto.TokenDTO;
 import br.com.unip.service.TokenService;
 import br.com.unip.util.FormLogin;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("auth")
@@ -28,6 +29,7 @@ public class AutenticacaoController {
 	@Autowired
 	private TokenService tokenService;
 	
+	@ApiOperation(value = "Enviar um email e senha para receber um token")
 	@PostMapping
 	public ResponseEntity<TokenDTO> autenticar(@Valid @RequestBody FormLogin form) {
 		UsernamePasswordAuthenticationToken dadosForm = form.converter();
