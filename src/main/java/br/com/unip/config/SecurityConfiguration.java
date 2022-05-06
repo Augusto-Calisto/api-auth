@@ -19,8 +19,8 @@ import br.com.unip.service.AuthenticationService;
 import br.com.unip.service.TokenService;
 import br.com.unip.validacao.AutorizacaoViaTokenFilter;
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -70,6 +70,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web
 		   .ignoring()
-		   .antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**", "/h2-console/**", "/error");
+		   .antMatchers("/swagger-ui.html",
+				   		"/swagger-ui/**",
+				   		"/v2/api-docs",
+				   		"/v3/api-docs",
+				   		"/webjars/**", 
+				   		"/configuration/**", 
+				   		"/swagger-resources/**", 
+				   		"/h2-console/**", 
+				   		"/error");
 	}
 }

@@ -1,36 +1,77 @@
 package br.com.unip.config;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 
 import br.com.unip.entity.Usuario;
-import springfox.documentation.builders.ParameterBuilder;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.schema.ModelRef;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
+import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.SecurityReference;
+import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
+@EnableSwagger2
 public class SwaggerConfiguration {
 	
 	@Bean
 	public Docket authApi() {
 		return new Docket(DocumentationType.SWAGGER_2)
+				.apiInfo(apiInfo())
+				.securityContexts(Arrays.asList(securityContext()))
+				.securitySchemes(apiKey())
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("br.com.unip")) // Quero que leia todas as classes do projeto, mas, tambem tem annotation para ignorar um end-point
-				.paths(PathSelectors.ant("/**")) // Quais end-points o Swagger tem analisar, neste caso /**, leia todos os end-points
+				.paths(PathSelectors.any()) // Quais end-points o Swagger tem analisar, leia todos os end-points
 				.build()
-				.ignoredParameterTypes(Usuario.class) // Para ignorar nos endpoints os parâmetros relacionados a classe Usuario
-				.globalOperationParameters(Arrays.asList(
-						new ParameterBuilder()
-						.name("Authorization")
-						.description("Header para o token JWT")
-						.modelRef(new ModelRef("string"))
-						.parameterAccess("header")
-						.required(false)
-						.build()));
+				.forCodeGeneration(true)
+				.produces(Collections.singleton("application/json"))
+                .consumes(Collections.singleton("application/json"))
+				.ignoredParameterTypes(Usuario.class); // Para ignorar nos endpoints os parâmetros relacionados a classe Usuario
+	}
+	
+	private ApiInfo apiInfo() {
+		return new ApiInfoBuilder()
+							.title("API Auth")
+							.version("1.0")
+							.description("Simular uma API de Autenticação")
+							.build();
+	}
+	
+	private List<SecurityScheme> apiKey() {
+		List<SecurityScheme> schemeList = new ArrayList<>();
+		
+		schemeList.add(new ApiKey("JWT", HttpHeaders.AUTHORIZATION, "header"));
+		
+        return schemeList;
+    }
+	
+	private SecurityContext securityContext() {
+		return SecurityContext.builder()
+								.securityReferences(tokenAuth())
+								.build();
+	}
+	
+	private List<SecurityReference> tokenAuth() {
+		AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+		
+		AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+		
+        authorizationScopes[0] = authorizationScope;
+        
+        return Arrays.asList(new SecurityReference("JWT", authorizationScopes));
 	}
 }
